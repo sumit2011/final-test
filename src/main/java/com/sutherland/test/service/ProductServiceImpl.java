@@ -30,11 +30,14 @@ public class ProductServiceImpl implements ProductService {
     
 
     public List<Product> getAllProducts() {
-    	return repo.findAll();
+//    	return repo.findAll();
+        return products;
     }
 
     public List<Product> getProductsByTypeAndPrice(String type, double price) {
-
-        return repo.findByProductTypeAndPrice(type,price);
+        return products.stream()
+                .filter(product -> product.getProductType().equalsIgnoreCase(type) && product.getPrice() > price)
+                .collect(Collectors.toList());
+//        return repo.findByProductTypeAndPrice(type,price)
     }
 }
