@@ -1,13 +1,18 @@
 package com.sutherland.test.service;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sutherland.test.entity.Product;
+import com.sutherland.test.repository.ProductRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
+	
+	@Autowired
+	ProductRepository repo;
 
     private List<Product> products = List.of(
         new Product(101, "RedTape", "Shoes", 1500),
@@ -21,14 +26,15 @@ public class ProductServiceImpl implements ProductService {
         new Product(109, "PeterEngland", "Shirts", 1200),
         new Product(110, "LondonBridge", "Shirts", 700)
     );
+    
+    
 
     public List<Product> getAllProducts() {
-        return products;
+    	return repo.findAll();
     }
 
     public List<Product> getProductsByTypeAndPrice(String type, double price) {
-        return products.stream()
-                .filter(product -> product.getProductType().equalsIgnoreCase(type) && product.getPrice() > price)
-                .collect(Collectors.toList());
+
+        return repo.findByProductTypeAndPrice(type,price);
     }
 }
