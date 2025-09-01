@@ -16,12 +16,12 @@ public class ProductController {
     @Autowired
     private ProductServiceImpl productService;
 
-    @GetMapping("/getAllProducts")
+    @GetMapping("/getallproducts")
     public List<Product> getAllProducts() {
         return productService.getAllProducts();
     }
 
-    @GetMapping("/getByTypeAndPrice")
+    @GetMapping("/getbytypeandprice")
     public List<Product> getByTypeAndPrice(@RequestParam String type, @RequestParam double price) {
         return productService.getProductsByTypeAndPrice(type, price);
     }
