@@ -13,7 +13,6 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Autowired
 	ProductRepository repo;
-
     private List<Product> products = List.of(
         new Product(101, "RedTape", "Shoes", 1500),
         new Product(102, "AllenSolley", "Shirts", 1000),
@@ -26,18 +25,12 @@ public class ProductServiceImpl implements ProductService {
         new Product(109, "PeterEngland", "Shirts", 1200),
         new Product(110, "LondonBridge", "Shirts", 700)
     );
-    
-    
-
     public List<Product> getAllProducts() {
-//    	return repo.findAll();
         return products;
     }
-
     public List<Product> getProductsByTypeAndPrice(String type, double price) {
         return products.stream()
                 .filter(product -> product.getProductType().equalsIgnoreCase(type) && product.getPrice() > price)
                 .collect(Collectors.toList());
-//        return repo.findByProductTypeAndPrice(type,price)
     }
 }
